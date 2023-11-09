@@ -1,4 +1,14 @@
-<script setup></script>
+<script setup>
+import { getPairs } from '../services/requests';
+
+async function allPairs(){
+    const response = await getPairs();
+
+    console.log(response)
+}
+
+allPairs();
+</script>
 
 <template>
     <v-table density="compact">
