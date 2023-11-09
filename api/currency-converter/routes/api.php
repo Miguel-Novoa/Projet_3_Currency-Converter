@@ -27,7 +27,9 @@ Route::post('/register', [AdminController::class, 'store']);
 
 Route::post('/currencies/add', [CurrencyController::class, 'add']);
 Route::get('/currencies/get', [CurrencyController::class, 'getAllCurrencies']);
+Route::delete('/currencies/delete/{currency}', [CurrencyController::class, 'deleteCurrency']);
 
 Route::post('/pairs/add', [PairController::class, 'add']);
 Route::get('/pairs/get', [PairController::class, 'getAllPairs']);
 Route::delete('/pairs/delete/{pair}', [PairController::class, 'destroy']);
+Route::put('/pairs/update/{pair}', [PairController::class, 'updatePair']);

@@ -19,7 +19,7 @@ class CreatePairsTable extends Migration
             $table->unsignedBigInteger('source_currency_id');
             $table->unsignedBigInteger('target_currency_id');
             $table->float('rate');
-            $table->integer('nb_conversions')->default(0);
+            $table->integer('nb_conversions')->default(0)->nullable();
 
             $table->foreign('source_currency_id')->references('id')->on('currencies');
             $table->foreign('target_currency_id')->references('id')->on('currencies');

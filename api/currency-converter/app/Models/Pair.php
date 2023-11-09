@@ -13,7 +13,10 @@ class Pair extends Model
         'source_currency_id',
         'target_currency_id',
         'rate',
-        'nb_conversions'
+        'nb_conversions',
     ];
 
+    protected $attributes = [
+        'nb_conversions' => 0,
+    ];
 }

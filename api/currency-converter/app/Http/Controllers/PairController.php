@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Pair;
+use Illuminate\Http\JsonResponse;
 
 class PairController extends Controller
 {
@@ -12,7 +13,13 @@ class PairController extends Controller
         $pair->source_currency_id = $request->input('source_currency_id');
         $pair->target_currency_id = $request->input('target_currency_id');
         $pair->rate = $request->input('rate');
-        $pair->nb_conversions = $request->input('nb_conversions');
+        $pair->nb_conversions = $request->input('nb_conversions', 0);
+
+        $request->validate([
+            'source_currency_id' => 'required',
+            'target_currency_id' => 'required',
+            'rate' => 'required|float'
+        ]);
 
         $pair->save();
 
@@ -27,6 +34,27 @@ class PairController extends Controller
         return response()->json([
             'message' => 'Paires récupérées !',
             'data' => $pairs
+        ]);
+    }
+
+    /**
+     * Update the specified resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function updatePair(Request $request, Pair $pair):JsonResponse
+    {
+        $request->validate([
+            'rate' => 'required',
+        ]);
+
+        $pair->update([
+            'rate' => $request->input('rate'),
+        ]);
+
+        return response()->json([
+            'message' => 'Paire mise à jour avec succès!',
+            'data' => $pair,
         ]);
     }
 
