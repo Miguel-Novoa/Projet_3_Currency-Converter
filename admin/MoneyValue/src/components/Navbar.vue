@@ -1,8 +1,20 @@
 <script setup>
+import VerifyLogin from './VerifyLogin.vue';
+import { removeTokenLocalStorage, getTokenLocalStorage } from '../services/localStorageService';
+import { useRouter } from 'vue-router';
+import { ref, watch } from 'vue';
+
+const router = useRouter();
+
+function logout() {
+    removeTokenLocalStorage();
+    router.push({ name: 'login' });
+}
 
 </script>
 
 <template>
+    <VerifyLogin />
     <nav>
         <h2>MoneyValue</h2>
         <li>
@@ -10,14 +22,14 @@
                 <a href="">Converter</a>
             </ul>
             <ul>
-                <button>Logout</button>
+                <button @click="logout">Logout</button>
             </ul>
         </li>
     </nav>
 </template>
 
 <style scoped>
-    nav{
+    nav {
         display: flex;
         flex-flow: row;
         justify-content: space-between;
@@ -27,7 +39,7 @@
         padding-right: 1rem;
     }
 
-    li{
+    li {
         list-style: none;
         display: flex;
         flex-flow: row;

@@ -18,7 +18,7 @@ class PairController extends Controller
         $request->validate([
             'source_currency_id' => 'required',
             'target_currency_id' => 'required',
-            'rate' => 'required|float'
+            'rate' => 'required'
         ]);
 
         $pair->save();

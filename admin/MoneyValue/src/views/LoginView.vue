@@ -14,8 +14,8 @@ export default {
     async function auth() {
       try {
         const response = await login(name.value, password.value);
-        if (response.message === 'Authentification réussie') {
-          console.log('yayy')
+        if (response.data.message === 'Authentification réussie') {
+          router.push({ name: 'home' })
         } else {
           console.log("Échec de l'authentification");
         }

@@ -1,18 +1,22 @@
 import axios, {AxiosError } from "axios";
-import { setTokenLocalStorage } from "./localStorageService";
+import { setTokenLocalStorage, removeTokenLocalStorage } from "./localStorageService";
 
-const url = "http://127.0.0.1:8000";
+const url = "http://127.0.0.1:8000/api";
 
 
 export async function login(name, password) {
-    axios.post(`${url + '/api/login'}`, {
-      "name": name,
-      "password": password
-    })
-    .then((response) => {
-      setTokenLocalStorage(response.token)
-      console.log(response);
+  try {
+    const response = await axios.post(`${url}/login`, {
+      name: name,
+      password: password
     });
+
+    setTokenLocalStorage(response.data.token);
+
+    return response;
+  } catch (error) {
+    throw error;
+  }
 }
 
 export async function getPairs(){
