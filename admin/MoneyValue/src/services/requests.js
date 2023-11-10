@@ -20,8 +20,55 @@ export async function login(name, password) {
 }
 
 export async function getPairs(){
-  axios.get(`${url + '/pairs/get'}`)
-  .then((response) => {
+  try {
+    const response = await axios.get(`${url + '/pairs/get'}`);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function addPair(sourceId, targetId, rate){
+  try{
+    const response = await axios.post(`${url + '/pairs/add'}`, {
+      source_currency_id: sourceId,
+      target_currency_id: targetId,
+      rate: rate
+    });
+
+    return response;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function editPair(id, rate){
+  try{
+    const response = await axios.put(`${url + '/pairs/update' + id}`, {
+      rate: rate
+    });
+
+    return response;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function getCurrencies(){
+  try {
+    const response = await axios.get(`${url + '/currencies/get'}`);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function getCurrency(id){
+  try {
+    const response = await axios.get(`${url + '/currencies/get/' + id}`);
     console.log(response)
-  })
+    return response.data.data;
+  } catch (error) {
+    throw error;
+  }
 }

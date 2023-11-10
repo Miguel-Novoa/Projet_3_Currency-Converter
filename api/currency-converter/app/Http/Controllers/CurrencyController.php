@@ -36,6 +36,21 @@ class CurrencyController extends Controller
         ]);
     }
 
+    public function getOneCurrency($id){
+        $currency = Currency::find($id);
+
+        if (!$currency) {
+            return response()->json([
+                'message' => 'Devise non trouvée',
+            ], 404);
+        }
+
+        return response()->json([
+            'message' => 'Devise récupérée !',
+            'data' => $currency,
+        ]);
+    }
+
     public function deleteCurrency(Pair $pair, Currency $currency): JsonResponse
     {
         try {

@@ -1,13 +1,25 @@
 <script setup>
+import EditPairPopup from '../components/EditPairPopup.vue';
+import { ref, onMounted, defineProps } from 'vue';
 import { getPairs } from '../services/requests';
 
-async function allPairs(){
-    const response = await getPairs();
+const pairsDatas = ref([]);
+const showEditPairPopup = ref(false);
+const selectedPairId = ref(null);
+const { currencies } = defineProps(['currencies']);
 
-    console.log(response)
-}
+onMounted(async () => {
+  const pairs = await getPairs();
+  pairsDatas.value = pairs.data.data;
+});
 
-allPairs();
+const openPopup = (pairId) => {
+  selectedPairId.value = pairId;
+  showEditPairPopup.value = true;
+  console.log('click')
+  console.log(selectedPairId.value)
+  console.log(showEditPairPopup.value)
+};
 </script>
 
 <template>
@@ -22,18 +34,19 @@ allPairs();
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>EUR -> USD</td>
-                <td>1.07</td>
-                <td>53</td>
+            <tr v-for="pair in pairsDatas" :key="pair.id">
+                <td>{{ currencies[pair.source_currency_id - 1].code }} -> {{ currencies[pair.target_currency_id - 1].code }}</td>
+                <td>{{ pair.rate }}</td>
+                <td>{{ pair.nb_conversions }}</td>
                 <td>
-                    <Button>Edit</Button>
+                    <v-btn @click="() => openPopup(pair.id)">Edit</v-btn>
                 </td>
                 <td>
-                    <button>Delete</button>
+                    <v-btn>Delete</v-btn>
                 </td>
             </tr>
         </tbody>
+        <EditPairPopup v-if="showEditPairPopup" :pairId="selectedPairId" @closePopup="showEditPairPopup.value = false"/>
 
     </v-table>
 </template>
