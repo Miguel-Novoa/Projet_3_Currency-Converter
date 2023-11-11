@@ -1,5 +1,5 @@
 <script setup>
-import { ref, defineProps, toRef } from 'vue';
+import { ref, defineProps, defineEmits } from 'vue';
 import { addPair } from '../services/requests';
 import { useRouter } from 'vue-router';
 
@@ -9,6 +9,7 @@ const selectedTargetCurrency = ref(null);
 const rate = ref(null);
 const { currencies } = defineProps(['currencies']);
 const router = useRouter();
+const emit = defineEmits();
 
 
 async function addPairs() {
@@ -23,6 +24,7 @@ async function addPairs() {
           const res = await addPair(targetCurrency, sourceCurrency, oppositeRate);
           if(res.data.message === 'Nouvelle paire ajoutée !'){
             dialog.value = false;
+            emit('closePairPopup');
             router.go();
           }else{
             console.log("L'ajout de la paire opposée a échoué");
@@ -33,13 +35,14 @@ async function addPairs() {
       } catch (err) {
         console.log(err);
       }
-
-  dialog.value = false;
 };
 
 const closePopup = () => {
   dialog.value = false;
+  emit('closePairPopup');
 }
+
+{ dialog, closePopup, addPairs, emit }
 </script>
 
 <template>

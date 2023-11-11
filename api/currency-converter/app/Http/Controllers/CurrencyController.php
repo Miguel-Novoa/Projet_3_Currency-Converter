@@ -12,7 +12,7 @@ class CurrencyController extends Controller
 {
     public function add(Request $request){
         $currency = new Currency;
-        $currency->code = $request->input('code');
+        $currency->code = strtoupper($request->input('code'));
         $currency->infos = $request->input('infos');
 
         $request->validate([
@@ -56,12 +56,10 @@ class CurrencyController extends Controller
         try {
             DB::beginTransaction();
 
-            // Delete all pairs using the deleted currency
             $pair::where('source_currency_id', $currency->id)
                 ->orWhere('target_currency_id', $currency->id)
                 ->delete();
 
-            // Delete the currency
             $currency->delete();
 
             DB::commit();
@@ -70,7 +68,6 @@ class CurrencyController extends Controller
                 'message' => 'Devise et paires associées supprimées avec succès!',
             ]);
         } catch (\Exception $e) {
-            // Cancel the transaction if an error occurs
             DB::rollBack();
 
             return response()->json([

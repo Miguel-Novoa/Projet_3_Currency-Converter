@@ -60,7 +60,6 @@ async function destroyPair(id){
             </tr>
         </tbody>
         <EditPairPopup v-if="showEditPairPopup" :pairId="selectedPairId" 
-        :popupState="showEditPairPopup" 
         @closePopup="showEditPairPopup = false"/>
 
     </v-table>

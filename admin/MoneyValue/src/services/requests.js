@@ -75,8 +75,19 @@ export async function getCurrencies(){
 export async function getCurrency(id){
   try {
     const response = await axios.get(`${url + '/currencies/get/' + id}`);
-    console.log(response)
     return response.data.data;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function addCurrency(code, infos){
+  try{
+    const response = await axios.post(`${url + '/currencies/add'}`, {
+      code : code,
+      infos : infos
+    });
+    return response;
   } catch (error) {
     throw error;
   }
