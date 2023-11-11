@@ -23,7 +23,7 @@ async function addPairs() {
           const res = await addPair(targetCurrency, sourceCurrency, oppositeRate);
           if(res.data.message === 'Nouvelle paire ajoutée !'){
             dialog.value = false;
-            router.push({ name: 'home' })
+            router.go();
           }else{
             console.log("L'ajout de la paire opposée a échoué");
           }

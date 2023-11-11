@@ -44,10 +44,19 @@ export async function addPair(sourceId, targetId, rate){
 
 export async function editPair(id, rate){
   try{
-    const response = await axios.put(`${url + '/pairs/update' + id}`, {
+    const response = await axios.put(`${url + '/pairs/update/' + id}`, {
       rate: rate
     });
 
+    return response;
+  } catch (error) {
+    throw error;
+  }
+}
+
+export async function deletePair(id){
+  try{
+    const response = await axios.delete(`${url + '/pairs/delete/' + id}`);
     return response;
   } catch (error) {
     throw error;
