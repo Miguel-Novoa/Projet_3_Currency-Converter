@@ -34,3 +34,4 @@ Route::post('/pairs/add', [PairController::class, 'add']);
 Route::get('/pairs/get', [PairController::class, 'getAllPairs']);
 Route::delete('/pairs/delete/{pair}', [PairController::class, 'destroy']);
 Route::put('/pairs/update/{pair}', [PairController::class, 'updatePair']);
+Route::put('/pairs/convert/{pair}', [PairController::class, 'countConversions']);

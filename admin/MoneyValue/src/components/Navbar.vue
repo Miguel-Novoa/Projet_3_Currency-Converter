@@ -1,8 +1,7 @@
 <script setup>
 import VerifyLogin from './VerifyLogin.vue';
-import { removeTokenLocalStorage, getTokenLocalStorage } from '../services/localStorageService';
-import { useRouter } from 'vue-router';
-import { ref, watch } from 'vue';
+import { removeTokenLocalStorage } from '../services/localStorageService';
+import { RouterLink, useRouter } from 'vue-router';
 
 const router = useRouter();
 
@@ -19,7 +18,7 @@ function logout() {
         <h2>MoneyValue</h2>
         <li>
             <ul>
-                <a href="">Converter</a>
+                <RouterLink :to="{name : 'converter'}">Converter</RouterLink>
             </ul>
             <ul>
                 <button @click="logout">Logout</button>

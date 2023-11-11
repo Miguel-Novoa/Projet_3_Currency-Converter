@@ -63,6 +63,15 @@ export async function deletePair(id){
   }
 }
 
+export async function pairConversions(id){
+  try{
+    const response = await axios.put(`${url + '/pairs/convert/' + id}`);
+    return response;
+  } catch (error) {
+    throw error;
+  }
+}
+
 export async function getCurrencies(){
   try {
     const response = await axios.get(`${url + '/currencies/get'}`);

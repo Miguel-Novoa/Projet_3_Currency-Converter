@@ -70,4 +70,14 @@ class PairController extends Controller
             'message' => 'Paire correctement supprimée !',
         ]);
     }
+
+    public function countConversions(Pair $pair){
+        $pair->update([
+            'nb_conversions' => $pair->getAttribute('nb_conversions') + 1
+        ]);
+        return response()->json([
+            'message' => 'Nouvelle conversion effectuée !',
+            'data' => $pair
+        ]);
+    }
 }
