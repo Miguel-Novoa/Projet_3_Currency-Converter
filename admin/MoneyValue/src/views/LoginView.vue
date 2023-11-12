@@ -66,11 +66,11 @@ export default {
   height: 100vh;
 }
 
-.card{
+.card {
   width: 40rem;
 }
 
-.btn{
+.btn {
   background-color: var(--main-color);
   color: #fff;
   cursor: pointer;

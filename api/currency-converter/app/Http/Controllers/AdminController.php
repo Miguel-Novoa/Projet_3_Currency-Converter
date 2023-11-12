@@ -33,8 +33,8 @@ class AdminController extends Controller
         $admin = User::where('name', $request->name)->first();
         $token = $admin->createToken("token")->plainTextToken;
         return response()->json([
-                'message' => 'Authentification réussie',
-                'token' => $token
+            'message' => 'Authentification réussie',
+            'token' => $token
         ]);
     }
 

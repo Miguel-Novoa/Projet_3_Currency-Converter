@@ -15,12 +15,12 @@ class AdminSeeder extends Seeder
     public function run()
     {
         $data =
-        [
             [
-              'name' => 'john',
-              'password' => bcrypt('password'),
-            ]
-        ];
+                [
+                    'name' => 'john',
+                    'password' => bcrypt('password'),
+                ]
+            ];
 
         foreach ($data as $userData) {
             User::create([

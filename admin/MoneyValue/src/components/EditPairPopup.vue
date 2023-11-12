@@ -10,19 +10,19 @@ const editedRate = ref(null);
 const span = ref(null);
 
 //Appel la requete editPair et en cas de succès apporte les modifications de la paire en base
-async function submitEdit(){
-  try{
+async function submitEdit() {
+  try {
     const response = await editPair(pairId, editedRate.value);
-    if (response.data.message === 'Paire mise à jour avec succès!'){
+    if (response.data.message === 'Paire mise à jour avec succès!') {
       dialog.value = false;
       emit('closePopup');
       router.go();
-    }else{
+    } else {
       span.value = true;
     }
   } catch (err) {
-        console.log(err);
-        span.value = true;
+    console.log(err);
+    span.value = true;
   }
 }
 
@@ -58,40 +58,40 @@ const emit = defineEmits();
 </template>
 
 <style scoped>
-  .card{
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-  }
+.card {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
 
-  form{
-    display: flex;
-    flex-flow: column;
-    row-gap: 1rem;
-  }
+form {
+  display: flex;
+  flex-flow: column;
+  row-gap: 1rem;
+}
 
-  .cardContent{
-    width: 20rem;
-  }
+.cardContent {
+  width: 20rem;
+}
 
-  span{
-    color: #D70022;
-  }
+span {
+  color: #D70022;
+}
 
-  .btns{
-    display: flex;
-    flex-flow: row;
-    align-items: center;
-    justify-content: center;
-    column-gap: 2rem;
-  }
+.btns {
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  justify-content: center;
+  column-gap: 2rem;
+}
 
-  .edit{
-    background-color: var(--main-color) !important;
-    color: #fff;
-  }
+.edit {
+  background-color: var(--main-color) !important;
+  color: #fff;
+}
 
-  button{
-    cursor: pointer;
-  }
+button {
+  cursor: pointer;
+}
 </style>

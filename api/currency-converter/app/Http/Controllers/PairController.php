@@ -14,7 +14,8 @@ class PairController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function add(Request $request){
+    public function add(Request $request)
+    {
         $pair = new Pair;
         $pair->source_currency_id = $request->input('source_currency_id');
         $pair->target_currency_id = $request->input('target_currency_id');
@@ -41,7 +42,8 @@ class PairController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function getAllPairs(){
+    public function getAllPairs()
+    {
         $pairs = pair::all();
         return response()->json([
             'message' => 'Paires récupérées !',
@@ -54,7 +56,7 @@ class PairController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function updatePair(Request $request, Pair $pair):JsonResponse
+    public function updatePair(Request $request, Pair $pair): JsonResponse
     {
         $request->validate([
             'rate' => 'required',
@@ -89,7 +91,8 @@ class PairController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function countConversions(Pair $pair){
+    public function countConversions(Pair $pair)
+    {
         $pair->update([
             'nb_conversions' => $pair->getAttribute('nb_conversions') + 1
         ]);

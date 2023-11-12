@@ -15,20 +15,20 @@ class CurrencySeeder extends Seeder
     public function run()
     {
         $data =
-        [
             [
-              'code' => 'USD',
-              'infos' => 'Dollar américain',
-            ],
-            [
-                'code' => 'EUR',
-                'infos' => 'EURO',
-            ],
-            [
-                'code' => 'YEN',
-                'infos' => 'Yen japonais',
-            ],
-        ];
+                [
+                    'code' => 'USD',
+                    'infos' => 'Dollar américain',
+                ],
+                [
+                    'code' => 'EUR',
+                    'infos' => 'EURO',
+                ],
+                [
+                    'code' => 'YEN',
+                    'infos' => 'Yen japonais',
+                ],
+            ];
 
         foreach ($data as $currencyData) {
             Currency::create([

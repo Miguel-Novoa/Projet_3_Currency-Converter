@@ -16,7 +16,8 @@ class CurrencyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function add(Request $request){
+    public function add(Request $request)
+    {
         $currency = new Currency;
         $currency->code = strtoupper($request->input('code'));
         $currency->infos = $request->input('infos');
@@ -40,7 +41,8 @@ class CurrencyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function getAllCurrencies(){
+    public function getAllCurrencies()
+    {
         $currencies = currency::all();
         return response()->json([
             'message' => 'Devises récupérées !',
@@ -54,7 +56,8 @@ class CurrencyController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function getOneCurrency($id){
+    public function getOneCurrency($id)
+    {
         $currency = Currency::find($id);
 
         if (!$currency) {

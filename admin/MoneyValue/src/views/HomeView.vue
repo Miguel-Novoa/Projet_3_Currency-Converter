@@ -21,15 +21,15 @@ const openAddCurrencyPopup = () => {
 }
 
 onMounted(async () => {
-    const currencies = await getCurrencies();
-    currenciesDatas.value = currencies.data.data;
+  const currencies = await getCurrencies();
+  currenciesDatas.value = currencies.data.data;
 
-    currenciesDatas.value.forEach(currency => {
-        currenciesTable.value.push({
-          code: currency.code,
-          id: currency.id
-        });
+  currenciesDatas.value.forEach(currency => {
+    currenciesTable.value.push({
+      code: currency.code,
+      id: currency.id
     });
+  });
 });
 </script>
 
@@ -44,44 +44,42 @@ onMounted(async () => {
         <button @click="openAddCurrencyPopup">Ajouter une devise</button>
       </li>
     </ul>
-    <AddPairPopup v-if="showAddPairPopup" :currencies="currenciesTable"
-    @closePairPopup="showAddPairPopup = false"/>
-    <AddCurrencyPopup v-if="showAddCurrencyPopup" 
-    @closeCurrencyPopup="showAddCurrencyPopup = false"/>
-    <PairsList :currencies="currenciesTable"/>
+    <AddPairPopup v-if="showAddPairPopup" :currencies="currenciesTable" @closePairPopup="showAddPairPopup = false" />
+    <AddCurrencyPopup v-if="showAddCurrencyPopup" @closeCurrencyPopup="showAddCurrencyPopup = false" />
+    <PairsList :currencies="currenciesTable" />
   </div>
 </template>
 
 <style scoped>
-  .homepageBody{
-    display: flex;
-    flex-flow: column;
-    align-items: center;
-  }
+.homepageBody {
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+}
 
-  #btnList{
-    display: flex;
-    flex-flow: row;
-    column-gap: 3rem;
-    list-style: none;
-  }
+#btnList {
+  display: flex;
+  flex-flow: row;
+  column-gap: 3rem;
+  list-style: none;
+}
 
-  button{
-    height: 2.3rem;
-    background-color: var(--main-color);
-    border: 2px solid var(--main-color);
-    border-radius: 2px;
-    padding-left: 0.5rem;
-    padding-right: 0.5rem;
-    text-align: center;
-    color: #fff;
-    font-weight: bold;
-    cursor: pointer;
-  }
+button {
+  height: 2.3rem;
+  background-color: var(--main-color);
+  border: 2px solid var(--main-color);
+  border-radius: 2px;
+  padding-left: 0.5rem;
+  padding-right: 0.5rem;
+  text-align: center;
+  color: #fff;
+  font-weight: bold;
+  cursor: pointer;
+}
 
-  button:hover{
-    background-color: #fff;
-    border: 2px solid var(--main-color);
-    color: var(--main-color);
-  }
+button:hover {
+  background-color: #fff;
+  border: 2px solid var(--main-color);
+  color: var(--main-color);
+}
 </style>
