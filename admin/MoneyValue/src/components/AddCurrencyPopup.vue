@@ -61,7 +61,7 @@ const closePopup = () => {
             <v-textarea variant="solo" v-model="description" label="Description" :rules="descriptionRules" maxlength="50" class="inputs"></v-textarea>
             <span v-if="span">Error : failed to add currency</span>
             <v-row class="buttons" justify="center">
-              <v-btn @click="submitCurrency" class="add">Add currency</v-btn>
+              <v-btn color="primary" @click="submitCurrency" class="add">Add currency</v-btn>
               <v-btn @click="closePopup" color="error">Close</v-btn>
             </v-row>
           </v-card-text>

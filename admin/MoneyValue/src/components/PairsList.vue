@@ -56,7 +56,7 @@ async function destroyPair(id){
                 :class="{'red': pair.nb_conversions === 0, 'main': pair.nb_conversions > 0}"
                 >{{ pair.nb_conversions }}</td>
                 <td>
-                    <v-btn class="editBtn" @click="() => openPopup(pair.id)">Edit</v-btn>
+                    <v-btn color="primary" class="editBtn" @click="() => openPopup(pair.id)">Edit</v-btn>
                 </td>
                 <td>
                     <v-btn color="error" @click="() => destroyPair(pair.id)">Delete</v-btn>
@@ -99,7 +99,7 @@ async function destroyPair(id){
     }
 
     .editBtn{
-        background-color: var(--main-color);
+        background-color: var(--main-color) !important;
         color: #fff;
     }
 

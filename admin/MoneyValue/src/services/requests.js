@@ -1,5 +1,5 @@
-import axios, {AxiosError } from "axios";
-import { setTokenLocalStorage, removeTokenLocalStorage } from "./localStorageService";
+import axios from "axios";
+import { setTokenLocalStorage } from "./localStorageService";
 
 const url = "http://127.0.0.1:8000/api";
 

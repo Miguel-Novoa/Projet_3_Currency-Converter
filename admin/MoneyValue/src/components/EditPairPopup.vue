@@ -47,7 +47,7 @@ const emit = defineEmits();
             <v-text-field variant="solo" v-model="editedRate" label="Rate" type="number"></v-text-field>
             <span v-if="span">Error : failed to edit pair</span>
             <div class="btns" role="region">
-              <v-btn class="edit" @click="submitEdit">Edit</v-btn>
+              <v-btn color="primary" class="edit" @click="submitEdit">Edit</v-btn>
               <v-btn @click="closePopup" color="error">Cancel</v-btn>
             </div>
           </v-form>

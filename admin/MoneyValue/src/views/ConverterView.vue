@@ -117,7 +117,7 @@ async function incrementConversions(id){
           <v-text-field variant="solo" v-model="valueConverted" label="Converted amount..." type="number" :disabled="true"></v-text-field>
         </div>
   
-        <v-btn type="submit" class="button">Convertir</v-btn>
+        <v-btn color="primary" type="submit" class="button">Convertir</v-btn>
       </v-container>
     </form>
   </template>
@@ -156,7 +156,7 @@ async function incrementConversions(id){
 
   .button {
     margin-top: 20px;
-    background-color: var(--main-color);
+    background-color: var(--main-color) !important;
     color: #fff;
     cursor: pointer;
   }
