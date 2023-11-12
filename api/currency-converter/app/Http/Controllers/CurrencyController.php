@@ -10,6 +10,12 @@ use Illuminate\Http\JsonResponse;
 
 class CurrencyController extends Controller
 {
+    /**
+     * Store new currency in database.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function add(Request $request){
         $currency = new Currency;
         $currency->code = strtoupper($request->input('code'));
@@ -28,6 +34,12 @@ class CurrencyController extends Controller
         ]);
     }
 
+    /**
+     * Get all currencies from database.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function getAllCurrencies(){
         $currencies = currency::all();
         return response()->json([
@@ -36,6 +48,12 @@ class CurrencyController extends Controller
         ]);
     }
 
+    /**
+     * Get one currency from database.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function getOneCurrency($id){
         $currency = Currency::find($id);
 
@@ -51,6 +69,12 @@ class CurrencyController extends Controller
         ]);
     }
 
+    /**
+     * Delete one currency from database and delete all involved pairs.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function deleteCurrency(Pair $pair, Currency $currency): JsonResponse
     {
         try {

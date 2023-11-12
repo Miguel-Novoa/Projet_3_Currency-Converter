@@ -10,8 +10,9 @@ const rate = ref(null);
 const { currencies } = defineProps(['currencies']);
 const router = useRouter();
 const emit = defineEmits();
+const span = ref(null);
 
-
+//Appel la requête addPair et en cas de succès, ajoute la nouvelle paire et la paire inverse a la base
 async function addPairs() {
   let sourceCurrency = JSON.parse(JSON.stringify(selectedSourceCurrency.value.id));
   let targetCurrency = JSON.parse(JSON.stringify(selectedTargetCurrency.value.id));
@@ -24,19 +25,21 @@ async function addPairs() {
           const res = await addPair(targetCurrency, sourceCurrency, oppositeRate);
           if(res.data.message === 'Nouvelle paire ajoutée !'){
             dialog.value = false;
+            span.value = false;
             emit('closePairPopup');
             router.go();
           }else{
-            console.log("L'ajout de la paire opposée a échoué");
+            span.value = true;
           }
         } else {
-          console.log("L'ajout de paire a échoué");
+          span.value = true;
         }
       } catch (err) {
-        console.log(err);
+        span.value = true;
       }
 };
 
+//ferme la popup
 const closePopup = () => {
   dialog.value = false;
   emit('closePairPopup');
@@ -72,6 +75,7 @@ const closePopup = () => {
             return-object
           ></v-autocomplete>
           <v-text-field class="inputs" v-model="rate" label="Enter rate..." type="number" variant="solo"></v-text-field>
+          <span v-if="span">Error : failed to add pairs</span>
           <div class="btns">
             <v-btn class="add" type="submit" color="primary">Add</v-btn>
             <v-btn color="error" @click="closePopup">Close</v-btn>
@@ -93,10 +97,15 @@ const closePopup = () => {
     display: flex;
     flex-flow: column;
     align-items: center;
+    row-gap: 1rem;
   }
 
   .inputs{
     width: 30rem;
+  }
+
+  span{
+    color: #D70022;
   }
 
   .btns{

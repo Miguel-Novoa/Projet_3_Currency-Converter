@@ -15,11 +15,13 @@ onMounted(async () => {
   pairsDatas.value = pairs.data.data;
 });
 
+//Ouvre la popup d'édition de paire
 const openPopup = (pairId) => {
     selectedPairId.value = pairId;
     showEditPairPopup.value = true;
 };
 
+//Appel la requete deletePair et en cas de succès supprime la paire de la base
 async function destroyPair(id){
     try {
         const response = await deletePair(id);

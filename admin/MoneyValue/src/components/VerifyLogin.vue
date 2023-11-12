@@ -7,11 +7,10 @@ export default {
   setup() {
     const router = useRouter()
 
-    // Check if token is in local storage when component is mounted
     onMounted(() => {
-
+      //Redirige l'utilisateur sur la page de connexion dans le cas où il n'est pas connecté
+      //(lorsque le token n'est pas dans le local storage)
       if (!getTokenLocalStorage()) {
-        // Redirect to login page
         router.push({ name: 'login' })
       }
     })

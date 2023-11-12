@@ -7,7 +7,9 @@ const dialog = ref(true);
 const { pairId } = defineProps(['pairId']);
 const router = useRouter();
 const editedRate = ref(null);
+const span = ref(null);
 
+//Appel la requete editPair et en cas de succès apporte les modifications de la paire en base
 async function submitEdit(){
   try{
     const response = await editPair(pairId, editedRate.value);
@@ -16,13 +18,15 @@ async function submitEdit(){
       emit('closePopup');
       router.go();
     }else{
-      console.log('Echec de la mise à jour de pair !')
+      span.value = true;
     }
   } catch (err) {
         console.log(err);
+        span.value = true;
   }
 }
 
+//ferme la popup
 const closePopup = () => {
   dialog.value = false;
   emit('closePopup');
@@ -41,6 +45,7 @@ const emit = defineEmits();
         <v-card-text class="cardContent">
           <v-form>
             <v-text-field variant="solo" v-model="editedRate" label="Rate" type="number"></v-text-field>
+            <span v-if="span">Error : failed to edit pair</span>
             <div class="btns" role="region">
               <v-btn class="edit" @click="submitEdit">Edit</v-btn>
               <v-btn @click="closePopup" color="error">Cancel</v-btn>
@@ -59,8 +64,18 @@ const emit = defineEmits();
     align-items: center;
   }
 
+  form{
+    display: flex;
+    flex-flow: column;
+    row-gap: 1rem;
+  }
+
   .cardContent{
     width: 20rem;
+  }
+
+  span{
+    color: #D70022;
   }
 
   .btns{

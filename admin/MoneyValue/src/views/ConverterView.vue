@@ -12,6 +12,10 @@ onMounted(async () => {
   await createAvailableCurrenciesTable();
 });
 
+/* Appel les requetes getCurrencies et getPairs afin de récupérer toutes les devises et paires.
+Puis pour chaque devise, compare l'id avec les id source et target des paires afin de vérifier
+si la devise est impliquée dans une paire, si c'est le cas ajoute la devise au tableau availableCurrenciesTable.
+ */
 async function createAvailableCurrenciesTable() {
   try {
     const currencyResponse = await getCurrencies();
@@ -41,15 +45,20 @@ async function createAvailableCurrenciesTable() {
   }
 }
 
+/*Appel la requête getPairs afin de récupérer toutes les paires.
+Compare les valeurs des selectedItem1 et selectedItem2 et les compare respectivement aux
+id source et cible de chaque pair. Dans le cas où il y a correspondance, calcul la valeur
+de la somme convertie en fonction de la somme entrée par l'utilisateur et du taux de la paire.
+*/
 async function handleConvert(){
     try {
     const pairsResponse = await getPairs();
 
     if (pairsResponse.data.message === 'Paires récupérées !') {
       const pairs = pairsResponse.data.data;
-      console.log(selectedItem1)
       let item1Id = JSON.parse(JSON.stringify(selectedItem1.value));
       let item2Id = JSON.parse(JSON.stringify(selectedItem2.value));
+
       pairs.forEach(pair => {
         if(pair.source_currency_id === item1Id && pair.target_currency_id === item2Id){
             let converted = pair.rate * valueToConvert.value;
@@ -63,6 +72,8 @@ async function handleConvert(){
   }
 }
 
+/* Appel la requete pairConversions afin d'incrémenter le nombre de conversions de la
+paire à chaque fois qu'une conversion est effectuée. */
 async function incrementConversions(id){
     try{
         await pairConversions(id);

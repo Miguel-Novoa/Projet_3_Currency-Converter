@@ -22,14 +22,17 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// Admin routes
 Route::post('/login', [AdminController::class, 'login']);
 Route::post('/register', [AdminController::class, 'store']);
 
+// Currencies routes
 Route::post('/currencies/add', [CurrencyController::class, 'add']);
 Route::get('/currencies/get', [CurrencyController::class, 'getAllCurrencies']);
 Route::delete('/currencies/delete/{currency}', [CurrencyController::class, 'deleteCurrency']);
 Route::get('/currencies/get/{currency}', [CurrencyController::class, 'getOneCurrency']);
 
+// Pairs routes
 Route::post('/pairs/add', [PairController::class, 'add']);
 Route::get('/pairs/get', [PairController::class, 'getAllPairs']);
 Route::delete('/pairs/delete/{pair}', [PairController::class, 'destroy']);

@@ -8,6 +8,12 @@ use Illuminate\Http\JsonResponse;
 
 class PairController extends Controller
 {
+    /**
+     * Store a newly created pair in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function add(Request $request){
         $pair = new Pair;
         $pair->source_currency_id = $request->input('source_currency_id');
@@ -29,6 +35,12 @@ class PairController extends Controller
         ]);
     }
 
+    /**
+     * get all pairs from database.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function getAllPairs(){
         $pairs = pair::all();
         return response()->json([
@@ -71,6 +83,12 @@ class PairController extends Controller
         ]);
     }
 
+    /**
+     * Count conversions.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
     public function countConversions(Pair $pair){
         $pair->update([
             'nb_conversions' => $pair->getAttribute('nb_conversions') + 1

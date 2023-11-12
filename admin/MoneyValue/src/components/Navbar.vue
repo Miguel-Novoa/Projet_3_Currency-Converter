@@ -5,6 +5,7 @@ import { RouterLink, useRouter } from 'vue-router';
 
 const router = useRouter();
 
+// Déconnecte l'utilisateur. Retire le token du local storage et redirige sur la page de connexion
 function logout() {
     removeTokenLocalStorage();
     router.push({ name: 'login' });
@@ -45,6 +46,7 @@ function logout() {
         padding-left: 1rem;
         padding-right: 1rem;
         color: #fff;
+        height: 4rem;
     }
 
     nav li {
