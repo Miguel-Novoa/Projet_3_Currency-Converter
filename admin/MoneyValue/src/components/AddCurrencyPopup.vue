@@ -7,34 +7,41 @@ const dialog = ref(true);
 
 const code = ref('');
 const description = ref('');
+const span = ref(false);
 const emit = defineEmits();
 const router = useRouter();
 
+//Empêche l'utilisateur de rentrer autre chose qu'un code a 3 lettres
 const codeRules = [
     (v) => !!v || 'Le code est requis',
-    (v) => /^[a-zA-Z]{0,3}$/.test(v) || 'Le code doit contenir maximum 3 lettres sans chiffre ni caractère spécial',
+    (v) => /^[a-zA-Z]{3}$/.test(v) || 'Le code doit contenir maximum 3 lettres sans chiffre ni caractère spécial',
 ];
 
+//Empêche l'utilisateur de rentrer plus de 50 caractères
 const descriptionRules = [
     (v) => !!v || 'La description est requise',
     (v) => v.length <= 50 || 'La description doit contenir maximum 50 caractères',
 ];
 
+//Appel la requête addCurrency et en cas de succès ajoute la nouvelle devise a la base
 async function submitCurrency(){
     try{
         const response = await addCurrency(code.value, description.value);
         if(response.data.message === 'Nouvelle devise ajoutée !'){
             dialog.value = false;
+            span.value = false;
             emit('closeCurrencyPopup');
             router.go();
         }else{
-            console.log("L'ajout d'une nouvelle devise a échoué");
+            span.value = true;
         }
     } catch (error) {
+      span.value = true;
     throw error;
   }
 };
 
+//ferme la popup
 const closePopup = () => {
     dialog.value = false;
     emit('closeCurrencyPopup');
@@ -52,7 +59,7 @@ const closePopup = () => {
             <v-text-field variant="solo" v-model="code" label="Code" type="text" :rules="codeRules" maxlength="3" class="inputs"></v-text-field>
   
             <v-textarea variant="solo" v-model="description" label="Description" :rules="descriptionRules" maxlength="50" class="inputs"></v-textarea>
-  
+            <span v-if="span">Error : failed to add currency</span>
             <v-row class="buttons" justify="center">
               <v-btn @click="submitCurrency" class="add">Add currency</v-btn>
               <v-btn @click="closePopup" color="error">Close</v-btn>
@@ -65,7 +72,7 @@ const closePopup = () => {
   
   <style scoped>
   .card {
-    height: 23rem;
+    height: 26rem;
     display: flex;
     flex-flow: column;
     align-items: center;
@@ -81,6 +88,11 @@ const closePopup = () => {
     align-items: center;
     justify-content: center;
     column-gap: 2rem;
+    margin-top: 1rem;
+  }
+
+  span{
+    color: #D70022;
   }
 
   .add{

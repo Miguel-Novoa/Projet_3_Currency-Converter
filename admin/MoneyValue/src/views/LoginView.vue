@@ -11,6 +11,7 @@ export default {
     const password = ref('');
     const visible = ref(false);
 
+    //Appel la requête login afin de connecter l'utilisateur
     async function auth() {
       try {
         const response = await login(name.value, password.value);

@@ -10,10 +10,12 @@ const showAddCurrencyPopup = ref(false);
 const currenciesDatas = ref([]);
 const currenciesTable = ref([]);
 
+//Change la valeur de showAddPairPopup pour afficher la popup d'ajout de paires.
 const openAddPairPopup = () => {
   showAddPairPopup.value = true;
 };
 
+//Change la valeur de showAddCurrencyPopup pour afficher la popup d'ajout de devises.
 const openAddCurrencyPopup = () => {
   showAddCurrencyPopup.value = true;
 }
