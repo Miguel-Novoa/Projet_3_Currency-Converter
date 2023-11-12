@@ -47,33 +47,70 @@ const closePopup = () => {
 
 <template>
   <v-dialog v-model="dialog" max-width="600">
-    <v-card>
-      <v-card-title>Ajouter une paire</v-card-title>
+    <v-card class="card">
+      <v-card-title>Add pair</v-card-title>
       <v-card-text>
-        <v-form @submit.prevent="addPairs">
-          <v-autocomplete
+        <v-form @submit.prevent="addPairs" class="form">
+          <v-autocomplete class="inputs"
             v-model="selectedSourceCurrency"
             :items="currencies"
-            label="Devise source"
+            label="Choose source currency"
             item-title="code"
             item-id="id"
             item-value="id"
+            variant="solo"
             return-object
           ></v-autocomplete>
-          <v-autocomplete
+          <v-autocomplete class="inputs"
             v-model="selectedTargetCurrency"
             :items="currencies"
-            label="Devise cible"
+            label="Choose target currency"
             item-title="code"
             item-id="id"
             item-value="id"
+            variant="solo"
             return-object
           ></v-autocomplete>
-          <v-text-field v-model="rate" label="Taux" type="number"></v-text-field>
-          <v-btn type="submit" color="primary">Ajouter</v-btn>
-          <v-btn @click="closePopup">Fermer</v-btn>
+          <v-text-field class="inputs" v-model="rate" label="Enter rate..." type="number" variant="solo"></v-text-field>
+          <div class="btns">
+            <v-btn class="add" type="submit" color="primary">Add</v-btn>
+            <v-btn color="error" @click="closePopup">Close</v-btn>
+          </div>
         </v-form>
       </v-card-text>
     </v-card>
   </v-dialog>
 </template>
+
+<style scoped>
+  .card{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+  }
+
+  .form{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+  }
+
+  .inputs{
+    width: 30rem;
+  }
+
+  .btns{
+    display: flex;
+    flex-flow: row;
+    column-gap: 2rem;
+  }
+
+  .add{
+    background-color: var(--main-color) !important;
+    color: #fff;
+  }
+
+  button{
+    cursor: pointer;
+  }
+</style>

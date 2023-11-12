@@ -74,41 +74,80 @@ async function incrementConversions(id){
 
 <template>
     <form @submit.prevent="handleConvert">
-      <v-container>
-        <v-row align="center">
-          <v-col>
-            <v-autocomplete
-              v-model="selectedItem1"
-              :items="availableCurrenciesTable"
-              label="Saisissez votre recherche..."
-              item-title="title"
-              item-value="id"
-            ></v-autocomplete>
-          </v-col>
-          <v-text-field v-model="valueToConvert" label="Valeur numérique" type="number"></v-text-field>
+      <v-container class="container">
+        <h1>Convert</h1>
   
-          <v-col>
-            <v-icon>mdi-arrow-right</v-icon>
-          </v-col>
+        <div class="row">
+          <v-autocomplete
+            v-model="selectedItem1"
+            :items="availableCurrenciesTable"
+            label="Enter the source currency..."
+            item-title="title"
+            item-value="id"
+            class="autocomplete"
+            variant="solo"
+          ></v-autocomplete>
   
-          <v-col>
-            <v-autocomplete
-              v-model="selectedItem2"
-              :items="availableCurrenciesTable"
-              label="Saisissez votre recherche..."
-              item-title="title"
-              item-value="id"
-            ></v-autocomplete>
-          </v-col>
+          <v-icon class="icon">mdi-arrow-right</v-icon>
   
-          <v-col>
-            <v-text-field v-model="valueConverted" label="Valeur numérique" type="number" :disabled="true"></v-text-field>
-          </v-col>
+          <v-autocomplete
+            v-model="selectedItem2"
+            :items="availableCurrenciesTable"
+            label="Enter the target currency..."
+            item-title="title"
+            item-value="id"
+            class="autocomplete"
+            variant="solo"
+          ></v-autocomplete>
+        </div>
   
-          <v-col>
-            <v-btn type="submit" color="primary">Convertir</v-btn>
-          </v-col>
-        </v-row>
+        <div class="row2">
+          <v-text-field variant="solo" v-model="valueToConvert" label="Enter the amount to convert..." type="number"></v-text-field>
+          <v-text-field variant="solo" v-model="valueConverted" label="Converted amount..." type="number" :disabled="true"></v-text-field>
+        </div>
+  
+        <v-btn type="submit" class="button">Convertir</v-btn>
       </v-container>
     </form>
   </template>
+  
+
+<style scoped>
+  .container {
+    text-align: center;
+    margin-top: 50px;
+  }
+
+  .row {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+  }
+
+  .autocomplete {
+    margin-right: 10px;
+    width: 200px;
+  }
+
+  .icon {
+    margin: 0 10px;
+    font-size: 24px;
+  }
+
+  .row2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 20px;
+    column-gap: 2rem;
+  }
+
+  .button {
+    margin-top: 20px;
+    background-color: var(--main-color);
+    color: #fff;
+    cursor: pointer;
+  }
+</style>
+

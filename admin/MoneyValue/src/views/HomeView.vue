@@ -32,9 +32,9 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div>
+  <div role="region" class="homepageBody">
     <h1>Liste des paires</h1>
-    <ul>
+    <ul id="btnList">
       <li>
         <button @click="openAddPairPopup">Ajouter une paire</button>
       </li>
@@ -49,3 +49,37 @@ onMounted(async () => {
     <PairsList :currencies="currenciesTable"/>
   </div>
 </template>
+
+<style scoped>
+  .homepageBody{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+  }
+
+  #btnList{
+    display: flex;
+    flex-flow: row;
+    column-gap: 3rem;
+    list-style: none;
+  }
+
+  button{
+    height: 2.3rem;
+    background-color: var(--main-color);
+    border: 2px solid var(--main-color);
+    border-radius: 2px;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
+    text-align: center;
+    color: #fff;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  button:hover{
+    background-color: #fff;
+    border: 2px solid var(--main-color);
+    color: var(--main-color);
+  }
+</style>

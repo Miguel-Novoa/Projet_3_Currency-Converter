@@ -36,7 +36,7 @@ async function destroyPair(id){
 </script>
 
 <template>
-    <v-table density="compact">
+    <v-table class="listBlock" density="compact">
         <thead>
             <tr>
                 <th class="text-left">Pair</th>
@@ -50,12 +50,14 @@ async function destroyPair(id){
             <tr v-for="pair in pairsDatas" :key="pair.id">
                 <td>{{ currencies[pair.source_currency_id - 1].code }} -> {{ currencies[pair.target_currency_id - 1].code }}</td>
                 <td>{{ pair.rate }}</td>
-                <td>{{ pair.nb_conversions }}</td>
+                <td
+                :class="{'red': pair.nb_conversions === 0, 'main': pair.nb_conversions > 0}"
+                >{{ pair.nb_conversions }}</td>
                 <td>
-                    <v-btn @click="() => openPopup(pair.id)">Edit</v-btn>
+                    <v-btn class="editBtn" @click="() => openPopup(pair.id)">Edit</v-btn>
                 </td>
                 <td>
-                    <v-btn @click="() => destroyPair(pair.id)">Delete</v-btn>
+                    <v-btn color="error" @click="() => destroyPair(pair.id)">Delete</v-btn>
                 </td>
             </tr>
         </tbody>
@@ -64,3 +66,47 @@ async function destroyPair(id){
 
     </v-table>
 </template>
+
+<style scoped>
+    .listBlock{
+        width: 60%;
+        margin-top: 4rem;
+    }
+
+    tr{
+        height: 4rem;
+    }
+
+    td{
+        text-align: center;
+        font-weight: bold;
+    }
+
+    thead{
+        background-color: var(--main-color);
+    }
+
+    thead th{
+        color: #fff !important;
+        text-align: center !important;
+        font-weight: bold !important;
+    }
+
+    button{
+        cursor: pointer;
+    }
+
+    .editBtn{
+        background-color: var(--main-color);
+        color: #fff;
+    }
+
+    .red{
+        color: #D70022;
+    }
+
+    .main{
+        color: var(--main-color);
+    }
+
+</style>

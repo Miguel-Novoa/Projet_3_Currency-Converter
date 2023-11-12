@@ -36,17 +36,47 @@ const emit = defineEmits();
 <template>
   <div>
     <v-dialog v-model="dialog" max-width="400">
-      <v-card>
+      <v-card class="card">
         <v-card-title>Edit Pair</v-card-title>
-        <v-card-text>
+        <v-card-text class="cardContent">
           <v-form>
-            <v-text-field v-model="editedRate" label="Rate" type="number"></v-text-field>
-
-            <v-btn @click="submitEdit" color="primary">Submit</v-btn>
-            <v-btn @click="closePopup">Cancel</v-btn>
+            <v-text-field variant="solo" v-model="editedRate" label="Rate" type="number"></v-text-field>
+            <div class="btns" role="region">
+              <v-btn class="edit" @click="submitEdit">Edit</v-btn>
+              <v-btn @click="closePopup" color="error">Cancel</v-btn>
+            </div>
           </v-form>
         </v-card-text>
       </v-card>
     </v-dialog>
   </div>
 </template>
+
+<style scoped>
+  .card{
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+  }
+
+  .cardContent{
+    width: 20rem;
+  }
+
+  .btns{
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: center;
+    column-gap: 2rem;
+  }
+
+  .edit{
+    background-color: var(--main-color) !important;
+    color: #fff;
+  }
+
+  button{
+    cursor: pointer;
+  }
+</style>

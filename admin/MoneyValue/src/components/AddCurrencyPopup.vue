@@ -45,21 +45,53 @@ const closePopup = () => {
 
 <template>
     <v-form>
-        <v-dialog v-model="dialog" max-width="400">
-            <v-card>
-                <v-card-title>Edit Pair</v-card-title>
-                <v-card-text>
-                    <v-text-field v-model="code" label="Code" type="text" :rules="codeRules" maxlength="3"></v-text-field>
-
-                    <v-textarea v-model="description" label="Description" :rules="descriptionRules"
-                        maxlength="50"></v-textarea>
-
-                    <v-btn @click="submitCurrency" color="primary">Add currency</v-btn>
-                    <v-btn @click="closePopup" color="error">Close</v-btn>
-                </v-card-text>
-            </v-card>
-        </v-dialog>
+      <v-dialog v-model="dialog" max-width="600">
+        <v-card class="card">
+          <v-card-title class="cardTitle">Edit Pair</v-card-title>
+          <v-card-text class="cardContent">
+            <v-text-field variant="solo" v-model="code" label="Code" type="text" :rules="codeRules" maxlength="3" class="inputs"></v-text-field>
+  
+            <v-textarea variant="solo" v-model="description" label="Description" :rules="descriptionRules" maxlength="50" class="inputs"></v-textarea>
+  
+            <v-row class="buttons" justify="center">
+              <v-btn @click="submitCurrency" class="add">Add currency</v-btn>
+              <v-btn @click="closePopup" color="error">Close</v-btn>
+            </v-row>
+          </v-card-text>
+        </v-card>
+      </v-dialog>
     </v-form>
-</template>
+  </template>
+  
+  <style scoped>
+  .card {
+    height: 23rem;
+    display: flex;
+    flex-flow: column;
+    align-items: center;
+  }
+  
+  .cardContent{
+    width: 30rem;
+  }
+
+  .buttons{
+    display: flex;
+    flex-flow: row;
+    align-items: center;
+    justify-content: center;
+    column-gap: 2rem;
+  }
+
+  .add{
+    background-color: var(--main-color) !important;
+    color: #fff;
+  }
+
+  button{
+    cursor: pointer;
+  }
+  </style>
+  
 
   
